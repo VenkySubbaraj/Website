@@ -640,7 +640,7 @@
     </section><!-- /Testimonials Section -->
 
     <!-- Contact Section -->
-    <section id="contact" class="contact section">
+    <section id="contact" class="contact section ">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -653,8 +653,8 @@
         <div class="row gy-4">
 
           <div class="col-lg-4">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
-              <i class="bi bi-geo-alt flex-shrink-0"></i>
+            <div class="info-item d-flex " data-aos="fade-up" data-aos-delay="200">
+              <i class="bi bi-geo-alt flex-shrink-0 j"></i>
               <div>
                 <h3>Address</h3>
                 <p>15/24A 2nd Avenue, Meenakshi Amman Nagar, Odderpalayam, Coimbatore - 641016</p>
@@ -664,7 +664,7 @@
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
-                <h3>Call Us</h3>
+                <h3>Call Me</h3>
                 <p>+91 9600460410</p>
               </div>
             </div><!-- End Info Item -->
@@ -680,7 +680,7 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
+            <form name="submit-to-google-sheet" method="post" class="php-email-form" data-aos="fade-up"
               data-aos-delay="200">
               <div class="row gy-4">
 
@@ -709,12 +709,56 @@
                 </div>
 
               </div>
-            </form>
-          </div><!-- End Contact Form -->
+            </form> 
+            <script>
+              const scriptURL = 'https://script.google.com/macros/s/AKfycbwRlAu_K8qiq-LF9_JlFYVmXUtXTScF5N1i_rXU-efR78dk9oRqBksXw8aBJinzFtmLSg/exec';
+              const form = document.forms['submit-to-google-sheet'];
+              
+              // Handle form submission
+              form.addEventListener('submit', e => {
+                e.preventDefault(); // Prevent the default form submission behavior
+            
+                const loading = form.querySelector('.loading');
+                const errorMessage = form.querySelector('.error-message');
+                const sentMessage = form.querySelector('.sent-message');
+            
+                // Show loading message
+                loading.style.display = 'block';
+                errorMessage.style.display = 'none';
+                sentMessage.style.display = 'none';
+            
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                  .then(response => {
+                    if (response.ok) {
+                      // Hide loading message
+                      loading.style.display = 'none';
+            
+                      // Show success message
+                      sentMessage.style.display = 'block';
+            
+                      // Clear the form
+                      form.reset();
+                    } else {
+                      throw new Error('Form submission failed');
+                    }
+                  })
+                  .catch(error => {
+                    // Hide loading message
+                    loading.style.display = 'none';
+            
+                    // Show error message
+                    errorMessage.innerHTML = `Error: ${error.message}`;
+                    errorMessage.style.display = 'block';
+                  });
+              });
+            </script>
+           </div> <!--End Contact Form -->
+
+          
 
         </div>
 
-      </div>
+      </div> 
 
     </section><!-- /Contact Section -->
 
@@ -766,6 +810,8 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 </body>
 
