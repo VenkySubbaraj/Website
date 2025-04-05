@@ -41,3 +41,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Inject API key into HTML
+        run: |
+          sed -i "s|__MY_PUBLIC_API_KEY__|${{ secrets.MY_PUBLIC_API_KEY }}|g" index.html
