@@ -45,3 +45,4 @@ jobs:
       - name: Inject API key into HTML
         run: |
           sed -i "s|__MY_PUBLIC_API_KEY__|${{ secrets.MY_PUBLIC_API_KEY }}|g" index.html
+          echo ${{ secrets.MY_PUBLIC_API_KEY }}
