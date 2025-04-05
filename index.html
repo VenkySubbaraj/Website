@@ -606,7 +606,7 @@
                 errorMessage.style.display = 'none';
                 sentMessage.style.display = 'none';
             
-                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                fetch(apiKey, { method: 'POST', body: new FormData(form) })
                   .then(response => {
                     if (response.ok) {
                       // Hide loading message
